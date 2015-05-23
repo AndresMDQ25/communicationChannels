@@ -12,15 +12,12 @@ class ImageAnalyzer
 public:
     ImageAnalyzer();
     void start(QString filePath);
-    QVector< QPair<QString, int> > getColorCount();
-    QVector<QString> toVector();
-    int getTotalPixels();
+    QVector<QString> getColors();
     int getHeight() const;
     int getWidth() const;
 private:
     QImage image;
-    QVector< QPair<QString, int> > ColorCount;
-    int totalPixels;
+    QVector<QString> colors;
     int height;
     int width;
 };

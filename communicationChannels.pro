@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     about.cpp \
-    imageanalyzer.cpp
+    imageanalyzer.cpp \
+    communicationchannel.cpp
 
 HEADERS  += mainwindow.h \
     about.h \
-    imageanalyzer.h
+    imageanalyzer.h \
+    communicationchannel.h
 
 FORMS    += mainwindow.ui \
     about.ui
