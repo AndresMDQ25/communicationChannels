@@ -74,7 +74,6 @@ void MainWindow::on_startButton_clicked()
     IA.start(filePath);
     this->orderOneSymbols.clear();
     this->orderOneSymbols = prob.calculate(IA.getColorCount(), IA.getTotalPixels());
-    HA.calculateHuffman(orderOneSymbols);
     this->startTable();
     ui->LBox->setText(QString::number(HA.getAverageLength()));
     ui->HBox->setText(QString::number(HA.getEntropy()));
