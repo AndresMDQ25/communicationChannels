@@ -1,14 +1,16 @@
 #ifndef COMMUNICATIONCHANNEL_H
 #define COMMUNICATIONCHANNEL_H
 
+#include <QVector>
+
 
 class CommunicationChannel
 {
 public:
     CommunicationChannel();
-    void generateMatrix(Vector<QString> colors);
+    void generateMatrix(QVector<QString> colors);
 private:
-    double matrix[][];
+    double ** matrix;
 };
 
 #endif // COMMUNICATIONCHANNEL_H

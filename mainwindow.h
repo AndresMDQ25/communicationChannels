@@ -6,13 +6,9 @@
 #include <QFileDialog>
 #include <QPixmap>
 #include "imageanalyzer.h"
-#include "probabilitiescalculator.h"
-#include "huffmanalgorithm.h"
+#include "communicationchannel.h"
 #include "about.h"
-#include "symbol.h"
-#include "nextension.h"
-#include "filecompressor.h"
-#include "filedecompressor.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -54,7 +50,6 @@ private:
 
     ImageAnalyzer IA;
     About aboutWindow;
-    NExtension nExtensionWindow;
 };
 
 #endif // MAINWINDOW_H

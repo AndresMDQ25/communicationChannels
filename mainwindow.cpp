@@ -6,8 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->compressButton->setDisabled(true);
-    ui->extendButton->setDisabled(true);
+
 }
 
 MainWindow::~MainWindow()
