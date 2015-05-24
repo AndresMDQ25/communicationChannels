@@ -47,25 +47,19 @@ void MainWindow::displayText()
 
 void MainWindow::startTable()
 {
-    /*ui->solutionTable->setColumnCount(0);
-    for (int j = 0; j < orderOneSymbols.size(); j++) {
-        ui->solutionTable->insertColumn(j);
-        QString orderOneSymbolstring;
-        orderOneSymbolstring.append("{");
-        for (int i = 0; i < orderOneSymbols.at(j).getColors().size(); i++) {
-            if (i != 0) {
-                orderOneSymbolstring.append(", ");
-            }
-            orderOneSymbolstring.append(orderOneSymbols.at(j).getColors().at(i));
+    ui->matrixTable->setColumnCount(0);
+    ui->matrixTable->setRowCount(0);
+    for (int x = 0; x < colorCount.size(); x++) {
+        ui->matrixTable->insertColumn(x);
+        for (int y = 0; y < colorCount.size(); y++) {
+            if (ui->matrixTable->rowCount() < colorCount.size())
+                ui->matrixTable->insertRow(y);
+            double prob = this->matrix[x][y];
+            QTableWidgetItem *item = new QTableWidgetItem(QString::number(prob));
+            ui->matrixTable->setItem(y, x, item);
         }
-        orderOneSymbolstring.append("}");
-        QTableWidgetItem *item = new QTableWidgetItem(orderOneSymbolstring);
-        ui->solutionTable->setItem(0, j,item);
-        QTableWidgetItem *item2 = new QTableWidgetItem(QString::number(orderOneSymbols.at(j).getProbability()));
-        ui->solutionTable->setItem(1, j, item2);
-        QTableWidgetItem *item3 = new QTableWidgetItem(orderOneSymbols.at(j).getHuffmanCode());
-        ui->solutionTable->setItem(2, j, item3);
-    }*/
+    }
+    ui->noiseBox->setText(QString::number(this->noise));
 }
 
 void MainWindow::on_startButton_clicked()
