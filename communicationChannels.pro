@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     about.cpp \
     imageanalyzer.cpp \
+    probabilitiescalculator.cpp \
     communicationchannel.cpp
 
 HEADERS  += mainwindow.h \
     about.h \
     imageanalyzer.h \
+    probabilitiescalculator.h \
     communicationchannel.h
 
 FORMS    += mainwindow.ui \

@@ -71,9 +71,23 @@ void MainWindow::startTable()
 void MainWindow::on_startButton_clicked()
 {
     IA.start(filePath);
-    this->colors = IA.getColors();
+    this->colorCount = IA.getColorCount();
+    PC.calculate(this->colorCount, IA.getTotalPixels());
+    this->colorProbs = PC.getProbabilities();
+
     //Calcular la matriz
+
+    CC.generateMatrix(this->colorProbs);
+    this->matrix = CC.getMatrix();
+    CC.calculateNoise();
+    qDebug() << "EL RUIDO ES DE: " << CC.getNoise();
+    this->noise = CC.getNoise();
     this->startTable();
+
+
+
+
+
 }
 
 void MainWindow::on_aboutButton_clicked()

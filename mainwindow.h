@@ -3,11 +3,14 @@
 
 #include <QMainWindow>
 #include <QString>
+//#include <QPair>
 #include <QFileDialog>
 #include <QPixmap>
 #include "imageanalyzer.h"
 #include "communicationchannel.h"
+#include "probabilitiescalculator.h"
 #include "about.h"
+#include <QDebug>
 
 
 namespace Ui {
@@ -24,23 +27,18 @@ public:
 
 private slots:
     void on_selectFileButton_clicked();
-
     void on_startButton_clicked();
-
     void on_aboutButton_clicked();
-
-    void on_extendButton_clicked();
-
-    void on_compressButton_clicked();
-
-    void on_decompressButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     QString filePath;
     QString getFileName();
     QString fileName;
-    QVector<QString> colors;
+    QVector< QPair<QString, int> > colorCount;
+    QVector< QPair<QString, double> > colorProbs;
+    double **matrix;
+    double noise;
 
 
 
@@ -49,6 +47,8 @@ private:
     void startTable();
 
     ImageAnalyzer IA;
+    ProbabilitiesCalculator PC;
+    CommunicationChannel CC;
     About aboutWindow;
 };
 

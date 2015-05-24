@@ -2,6 +2,8 @@
 #define IMAGEANALYZER_H
 
 #include <QString>
+//#include <QPair>
+#include <QVector>
 #include <QImage>
 #include <QDebug>
 #include <QRgb>
@@ -12,11 +14,18 @@ class ImageAnalyzer
 public:
     ImageAnalyzer();
     void start(QString filePath);
-    QVector<QString> getColors();
+    QVector< QPair<QString, int> > getColorCount();
+    QVector<QString> toVector();
+    int getTotalPixels();
+    int getHeight() const;
+    int getWidth() const;
 
 private:
     QImage image;
-    QVector<QString> colors;
+    QVector< QPair<QString, int> > ColorCount;
+    int totalPixels;
+    int height;
+    int width;
 };
 
 #endif // IMAGEANALYZER_H

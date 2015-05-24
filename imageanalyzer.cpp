@@ -6,24 +6,60 @@ ImageAnalyzer::ImageAnalyzer()
 
 void ImageAnalyzer::start(QString filePath)
 {
-    this->colors.clear();
+    this->ColorCount.clear();
     if (image.load(filePath)) {
-        int height = image.height();
-        int width = image.width();
-        QVector<QString> colors;
-        for (int x=0; x < height; x++) {
-            for (int y=0; y < width; y++) {
+        this->height = image.height();
+        this->width = image.width();
+        QVector< QPair<QString, int> > colorCount;
+        for (int x=0; x < this->height; x++) {
+            for (int y=0; y < this->width; y++) {
                 QString value = ((QColor)image.pixel(y, x)).name();
-                if(!colors.contains(value))
-                    colors.push_back(value);
+                int i = 0;
+                bool counted = false;
+                while (i < colorCount.size() && !counted){
+                    if (colorCount.at(i).first == value) {
+                        colorCount.replace(i, qMakePair(value, colorCount.at(i).second+1));
+                        counted = true;
+                    }
+                    else i++;
+                }
+                if (!counted)
+                    colorCount.push_back(qMakePair(value, 1));
             }
         }
-        this->colors = colors;
+        this->ColorCount = colorCount;
+        this->totalPixels =  image.width()*image.height();
     }
 }
 
-
-QVector<QString> ImageAnalyzer::getColors()
+QVector<QString> ImageAnalyzer::toVector()
 {
-    return this->colors;
+    QVector<QString> pixels;
+    for (int x=0; x < this->height; x++) {
+        for (int y=0; y < this->width; y++) {
+            QString value = ((QColor)image.pixel(y, x)).name();
+            pixels.append(value);
+        }
+    }
+    return pixels;
+}
+
+int ImageAnalyzer::getHeight() const
+{
+    return this->height;
+}
+
+int ImageAnalyzer::getWidth() const
+{
+    return this->width;
+}
+
+QVector< QPair<QString, int> > ImageAnalyzer::getColorCount()
+{
+    return this->ColorCount;
+}
+
+int ImageAnalyzer::getTotalPixels()
+{
+    return this->totalPixels;
 }
