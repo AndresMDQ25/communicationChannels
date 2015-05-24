@@ -48,7 +48,7 @@ void MainWindow::displayText()
 
 void MainWindow::startTable()
 {
-    ui->solutionTable->setColumnCount(0);
+    /*ui->solutionTable->setColumnCount(0);
     for (int j = 0; j < orderOneSymbols.size(); j++) {
         ui->solutionTable->insertColumn(j);
         QString orderOneSymbolstring;
@@ -66,51 +66,19 @@ void MainWindow::startTable()
         ui->solutionTable->setItem(1, j, item2);
         QTableWidgetItem *item3 = new QTableWidgetItem(orderOneSymbols.at(j).getHuffmanCode());
         ui->solutionTable->setItem(2, j, item3);
-    }
+    }*/
 }
 
 void MainWindow::on_startButton_clicked()
 {
     IA.start(filePath);
-    this->orderOneSymbols.clear();
-    this->orderOneSymbols = prob.calculate(IA.getColorCount(), IA.getTotalPixels());
+    this->colors = IA.getColors();
+    //Calcular la matriz
     this->startTable();
-    ui->LBox->setText(QString::number(HA.getAverageLength()));
-    ui->HBox->setText(QString::number(HA.getEntropy()));
-    ui->nBox->setText(QString::number(HA.getPerformance()));
-    ui->compressButton->setDisabled(false);
-    ui->extendButton->setDisabled(false);
 }
 
 void MainWindow::on_aboutButton_clicked()
 {
     aboutWindow.setWindowTitle("About");
     aboutWindow.show();
-}
-
-void MainWindow::on_extendButton_clicked()
-{
-    nExtensionWindow.setWindowTitle("DATA CALCULATION COMPLETE, PLEASE WAIT");
-    QString nText = ui->NBox->toPlainText();
-    int n = nText.toInt();
-    orderNSymbols.clear();
-    prob.extend(n, orderNSymbols);
-    nExtensionWindow.show();
-    nExtensionWindow.loadData(orderNSymbols);
-    nExtensionWindow.setWindowTitle("N-EXTENSION");
-}
-
-void MainWindow::on_compressButton_clicked()
-{
-    FileCompressor FC;
-    QVector<QString> image = IA.toVector();
-    int height = IA.getHeight();
-    int width = IA.getWidth();
-    FC.compress(orderOneSymbols, image, height, width);
-}
-
-void MainWindow::on_decompressButton_clicked()
-{
-    FileDecompressor FDC;
-    FDC.decompress();
 }

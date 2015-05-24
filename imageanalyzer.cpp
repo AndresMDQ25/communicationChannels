@@ -8,11 +8,11 @@ void ImageAnalyzer::start(QString filePath)
 {
     this->ColorCount.clear();
     if (image.load(filePath)) {
-        this->height = image.height();
-        this->width = image.width();
+        int height = image.height();
+        int width = image.width();
         QVector<QString> colors;
-        for (int x=0; x < this->height; x++) {
-            for (int y=0; y < this->width; y++) {
+        for (int x=0; x < height; x++) {
+            for (int y=0; y < width; y++) {
                 QString value = ((QColor)image.pixel(y, x)).name();
                 if(!colors.contains(value))
                     colors.push_back(value);
@@ -22,17 +22,8 @@ void ImageAnalyzer::start(QString filePath)
     }
 }
 
-int ImageAnalyzer::getHeight() const
-{
-    return this->height;
-}
 
-int ImageAnalyzer::getWidth() const
-{
-    return this->width;
-}
-
-QVector<QString> ImageAnalyzer::getColorCount()
+QVector<QString> ImageAnalyzer::getColors()
 {
     return this->colors;
 }

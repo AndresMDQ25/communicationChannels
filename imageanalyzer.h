@@ -13,13 +13,10 @@ public:
     ImageAnalyzer();
     void start(QString filePath);
     QVector<QString> getColors();
-    int getHeight() const;
-    int getWidth() const;
+
 private:
     QImage image;
     QVector<QString> colors;
-    int height;
-    int width;
 };
 
 #endif // IMAGEANALYZER_H
