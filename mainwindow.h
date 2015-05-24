@@ -44,16 +44,15 @@ private:
     QString filePath;
     QString getFileName();
     QString fileName;
+    QVector<QString> colors;
+
+
+
     void displayText();
     void displayDataText();
     void startTable();
-    void updateTable(QVector< QPair<QString, QString> > solution);
-    QVector< QPair<int, double> > lenghtData();
-    HuffmanAlgorithm HA;
+
     ImageAnalyzer IA;
-    ProbabilitiesCalculator prob;
-    QVector<Symbol> orderOneSymbols;
-    QVector<Symbol> orderNSymbols;
     About aboutWindow;
     NExtension nExtensionWindow;
 };
