@@ -14,6 +14,7 @@ public:
     void generateMatrix(QVector< QPair<QString, double> > probabilities);
     double **getMatrix();
     void calculateNoise();
+    void calculateLoss();
     double getNoise();
     QPair<int, int> asd;
 
@@ -23,6 +24,7 @@ private:
     QVector< QPair<QString, double> > probs;
     double ** matrix;
     double noise;
+    double loss;
     int size;
 };
 

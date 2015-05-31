@@ -49,6 +49,64 @@ void CommunicationChannel::calculateNoise()
     this->noise = noise;
 }
 
+double CommunicationChannel::getTempLoss()
+{
+    double loss = 0;
+    for (int y = 0; y < this->size; y++) {
+        double temp = 0;
+        for (int x = 0; x < this->size; x++) {
+            temp += (this->computationalMatix[x][y] * log2 (this->computationalMatrix[x][y]));
+        }
+        loss += probY.at(y) * -temp;
+    }
+    return loss;
+}
+
+double **CommunicationChannel::getComputationalMatrix()
+{
+    double **finalMatrix = new double*[this->size];
+    for (int i = 0; i < this->size; i++) {
+        finalMatrix[i] = new double[this->size];
+        for (int e = 0; e < this->size; e++) {
+            finalMatrix[i][e] = 0;
+        }
+    }
+    return finalMatrix;
+
+
+
+}
+
+int CommunicationChannels::getNextSymbol()
+{
+    int r = rand();
+
+
+    for (int i = 0; i < this->size; i++) {
+        QPair<QString, double> pair = (probs).at(i);
+        if (r > pair.second)
+            return i;
+    }
+}
+
+void CommuncationChannel::calculateLoss()
+{
+    this->computationalMatrix = generateComputationalMatrix();
+    double oldLoss = 0;
+    double newLoss = 0;
+    while (newLoss - oldLoss < 0.003) {
+        int emitedSymbol = getNextSymbol();
+        int receivedSymbol = getReceivedSymbol(emitedSymbol);
+
+    }
+    //emitir simbolo
+    //recibir simbolo
+    //actualizar probs de Y
+    //actualizar matriz(x, y)
+    //perdida = perdida(matriz)
+    //
+}
+
 double CommunicationChannel::getNoise()
 {
     return this->noise;
