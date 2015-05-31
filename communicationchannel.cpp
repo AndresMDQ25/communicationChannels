@@ -39,12 +39,12 @@ void CommunicationChannel::calculateNoise()
 {
     double noise = 0;
     for (int x = 0; x < this->size; x++) {
-        double temp;
+        double temp = 0;
         for (int y = 0; y < this->size; y++) {
-            temp -= (this->matrix[x][y] * log2 (this->matrix[x][y]));
+            temp += (this->matrix[x][y] * log2 (this->matrix[x][y]));
         }
         QPair<QString, double> pair = (probs).at(x);
-        noise += pair.second * temp;
+        noise += pair.second * -temp;
     }
     this->noise = noise;
 }
