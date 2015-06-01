@@ -10,7 +10,6 @@ class ProbabilitiesCalculator
 public:
     ProbabilitiesCalculator();
     void calculate(const QVector< QPair<QString, int> > &colorCount, int total);
-    //void backtrackNoRecursion(int n);
     QVector< QPair<QString, double> > getProbabilities();
 private:
      QVector< QPair<QString, double> > probs;
