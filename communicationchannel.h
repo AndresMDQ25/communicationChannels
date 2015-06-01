@@ -17,7 +17,8 @@ public:
     void calculateNoise();
     void calculateLoss();
     double getNoise();
-    QPair<int, int> asd;
+    double getLoss();
+    QPair<int, double> getLostSymbol();
 
 
 
@@ -27,6 +28,7 @@ private:
     double **getComputationalMatrix();
     double **getAccumulatedProbs();
     double getTempLoss(QVector<double> receivedProbs);
+    bool converge(double oldLoss, double newLoss);
 
     QVector< QPair<QString, double> > probs;
     double ** computationalMatrix;

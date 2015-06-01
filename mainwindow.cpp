@@ -60,6 +60,9 @@ void MainWindow::startTable()
         }
     }
     ui->noiseBox->setText(QString::number(this->noise));
+    ui->lossBox->setText(QString::number(this->loss));
+    ui->lostSymbolBox->setText(this->lostSymbol.first);
+    ui->lostSymbolProbBox->setText(QString::number(this->lostSymbol.second));
 }
 
 void MainWindow::on_startButton_clicked()
@@ -74,9 +77,13 @@ void MainWindow::on_startButton_clicked()
     CC.generateMatrix(this->colorProbs);
     this->matrix = CC.getMatrix();
     CC.calculateNoise();
+    CC.calculateLoss();
     qDebug() << "EL RUIDO ES DE: " << CC.getNoise();
     this->noise = CC.getNoise();
-    CC.calculateLoss();
+    this->loss = CC.getLoss();
+    QPair<int, double> lostsymb = CC.getLostSymbol();
+    this->lostSymbol.first = colorProbs.at(lostsymb.first).first;
+    this->lostSymbol.second = lostsymb.second;
     this->startTable();
 
 

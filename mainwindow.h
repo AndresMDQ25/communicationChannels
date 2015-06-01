@@ -39,6 +39,8 @@ private:
     QVector< QPair<QString, double> > colorProbs;
     double **matrix;
     double noise;
+    double loss;
+    QPair<QString, double> lostSymbol;
 
 
 

@@ -72,6 +72,7 @@ double CommunicationChannel::getTempLoss(QVector<double> receivedProbs)
             }
             else temp += 0;
         }
+        this->symbolsLoss.replace(y, receivedProbs.at(y)/totalprobs * -temp);
         loss += receivedProbs.at(y)/totalprobs * -temp;
     }
     return loss;
@@ -127,16 +128,25 @@ int CommunicationChannel::getReceivedSymbol(int emited)
     }
 }
 
+bool CommunicationChannel::converge(double oldLoss, double newLoss)
+{
+    if (abs(newLoss - oldLoss)>1e-9)
+        return false;
+    return true;
+}
+
 void CommunicationChannel::calculateLoss()
 {
     this->computationalMatrix = getComputationalMatrix();
+    this->symbolsLoss.fill(0, this->size);
     QVector<double> receivedProbs;
     for (int i = 0; i < this->size; i++) {
         receivedProbs.push_back(0);
     }
     double oldLoss = 0;
     double newLoss = 0;
-    //while (newLoss - oldLoss < 0.003) {
+    int counter = 1;
+    while (!converge(oldLoss, newLoss) || counter < 10000)
     for (int e = 0; e < 10000; e++) {
         int emitedSymbol = getNextSymbol();
         int receivedSymbol = getReceivedSymbol(emitedSymbol);
@@ -150,15 +160,37 @@ void CommunicationChannel::calculateLoss()
         //update loss
         oldLoss = newLoss;
         newLoss = getTempLoss(receivedProbs);
+        counter++;
 
     }
 
     qDebug() << "LA PERDIDA ES DE: " << newLoss;
+    qDebug() << this->symbolsLoss;
     this->loss = newLoss;
+}
+
+QPair<int, double> CommunicationChannel::getLostSymbol()
+{
+    QPair <int, double> max;
+    max.first = -1;
+    max.second = 0;
+    for (int i = 0; i < this->size; i++) {
+        if (max.second < this->symbolsLoss.at(i)) {
+            max.first = i;
+            max.second = this->symbolsLoss.at(i);
+        }
+    }
+    return max;
 }
 
 double CommunicationChannel::getNoise()
 {
     return this->noise;
 }
+
+double CommunicationChannel::getLoss()
+{
+    return this->loss;
+}
+
 
