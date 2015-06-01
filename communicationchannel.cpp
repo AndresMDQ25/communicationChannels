@@ -146,8 +146,7 @@ void CommunicationChannel::calculateLoss()
     double oldLoss = 0;
     double newLoss = 0;
     int counter = 1;
-    while (!converge(oldLoss, newLoss) || counter < 10000)
-    for (int e = 0; e < 10000; e++) {
+    while (!converge(oldLoss, newLoss) || counter < 10000) {
         int emitedSymbol = getNextSymbol();
         int receivedSymbol = getReceivedSymbol(emitedSymbol);
 
@@ -161,7 +160,6 @@ void CommunicationChannel::calculateLoss()
         oldLoss = newLoss;
         newLoss = getTempLoss(receivedProbs);
         counter++;
-
     }
 
     qDebug() << "LA PERDIDA ES DE: " << newLoss;
