@@ -76,6 +76,7 @@ void MainWindow::on_startButton_clicked()
     CC.calculateNoise();
     qDebug() << "EL RUIDO ES DE: " << CC.getNoise();
     this->noise = CC.getNoise();
+    CC.calculateLoss();
     this->startTable();
 
 
